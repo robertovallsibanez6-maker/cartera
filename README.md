@@ -21,3 +21,4 @@ Desde la app, en Operaciones → "Nuevo activo", indicando el símbolo de Yahoo 
 ## Ejecutar el pipeline a mano
 
 Actions → "Actualizar precios" → "Run workflow".
+
