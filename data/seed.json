@@ -1,83 +1,734 @@
 {
   "version": 1,
-  "note": "Carga inicial generada el 2026-10-05 a partir de la exportación de Trade Republic y las capturas de MyInvestor. Las operaciones de MyInvestor marcadas con estimated=true tienen fecha y participaciones aproximadas: corrígelas en Operaciones.",
+  "note": "Carga inicial generada el 2026-10-05 a partir de la exportación de Trade Republic y el CSV de movimientos de MyInvestor. Las compras de fondos y del ETP de bitcoin se registran por importe: las participaciones se calculan con el valor liquidativo o precio del día de la compra.",
   "transactions": [
-    { "id": "t001", "date": "2025-02-04", "instrument": "NVDA", "type": "buy", "units": 0.737991, "price": 114.50, "fee": 0, "tax": 0 },
-    { "id": "t002", "date": "2025-02-04", "instrument": "NVDA", "type": "buy", "units": 1, "price": 114.50, "fee": 1, "tax": 0 },
-    { "id": "t003", "date": "2025-02-10", "instrument": "GOOGL", "type": "buy", "units": 1, "price": 181.50, "fee": 1, "tax": 0 },
-    { "id": "t004", "date": "2025-02-10", "instrument": "GOOGL", "type": "buy", "units": 0.101928, "price": 181.50, "fee": 0, "tax": 0 },
-    { "id": "t005", "date": "2025-02-10", "instrument": "MSFT", "type": "buy", "units": 0.008591, "price": 401.55, "fee": 0, "tax": 0 },
-    { "id": "t006", "date": "2025-02-10", "instrument": "MSFT", "type": "buy", "units": 1, "price": 401.55, "fee": 1, "tax": 0 },
-    { "id": "t007", "date": "2025-02-12", "instrument": "HIVE", "type": "buy", "units": 50, "price": 2.71, "fee": 1, "tax": 0 },
-    { "id": "t008", "date": "2025-02-18", "instrument": "NVDA", "type": "buy", "units": 0.885536, "price": 135.24, "fee": 0, "tax": 0 },
-    { "id": "t009", "date": "2025-02-18", "instrument": "NVDA", "type": "buy", "units": 1, "price": 135.24, "fee": 1, "tax": 0 },
-
-    { "id": "d001", "date": "2025-03-13", "instrument": "MSFT", "type": "dividend", "amount": 0.77, "tax": 0.12 },
-    { "id": "d002", "date": "2025-03-17", "instrument": "GOOGL", "type": "dividend", "amount": 0.20, "tax": 0.03 },
-    { "id": "d003", "date": "2025-04-02", "instrument": "NVDA", "type": "dividend", "amount": 0.04, "tax": 0.01 },
-    { "id": "d004", "date": "2025-06-12", "instrument": "MSFT", "type": "dividend", "amount": 0.73, "tax": 0.11 },
-    { "id": "d005", "date": "2025-06-16", "instrument": "GOOGL", "type": "dividend", "amount": 0.20, "tax": 0.03 },
-    { "id": "d006", "date": "2025-07-03", "instrument": "NVDA", "type": "dividend", "amount": 0.03, "tax": 0.01 },
-    { "id": "d007", "date": "2025-09-11", "instrument": "MSFT", "type": "dividend", "amount": 0.72, "tax": 0.23 },
-    { "id": "d008", "date": "2025-09-15", "instrument": "GOOGL", "type": "dividend", "amount": 0.20, "tax": 0.06 },
-    { "id": "d009", "date": "2025-10-02", "instrument": "NVDA", "type": "dividend", "amount": 0.03, "tax": 0.01 },
-    { "id": "d010", "date": "2025-12-11", "instrument": "MSFT", "type": "dividend", "amount": 0.79, "tax": 0.25 },
-    { "id": "d011", "date": "2025-12-15", "instrument": "GOOGL", "type": "dividend", "amount": 0.20, "tax": 0.06 },
-    { "id": "d012", "date": "2025-12-24", "instrument": "NVDA", "type": "dividend", "amount": 0.03, "tax": 0.01 },
-    { "id": "d013", "date": "2026-03-12", "instrument": "MSFT", "type": "dividend", "amount": 0.79, "tax": 0.25 },
-    { "id": "d014", "date": "2026-03-16", "instrument": "GOOGL", "type": "dividend", "amount": 0.20, "tax": 0.06 },
-    { "id": "d015", "date": "2026-04-01", "instrument": "NVDA", "type": "dividend", "amount": 0.03, "tax": 0.01 },
-
-    { "id": "t010", "date": "2026-05-28", "instrument": "HIVE", "type": "sell", "units": 50, "price": 3.842, "fee": 1, "tax": 0 },
-    { "id": "t011", "date": "2026-05-28", "instrument": "NVDA", "type": "sell", "units": 1.865876, "price": 182.22, "fee": 1, "tax": 0 },
-    { "id": "t012", "date": "2026-05-28", "instrument": "GOOGL", "type": "sell", "units": 0.657501, "price": 334.60, "fee": 1, "tax": 0 },
-    { "id": "t013", "date": "2026-05-28", "instrument": "MSFT", "type": "buy", "units": 0.164338, "price": 365.15, "fee": 1, "tax": 0 },
-    { "id": "t014", "date": "2026-05-28", "instrument": "IBE", "type": "buy", "units": 15.349194, "price": 19.55, "fee": 1, "tax": 0.60 },
-    { "id": "t015", "date": "2026-05-28", "instrument": "META", "type": "buy", "units": 0.552486, "price": 542.90, "fee": 1, "tax": 0 },
-
-    { "id": "m001", "date": "2026-05-29", "instrument": "WORLD", "type": "buy", "units": 377.772, "price": 13.8707, "fee": 0, "tax": 0, "estimated": true, "note": "Posición inicial MyInvestor: 5.239,98 € invertidos. Fecha y participaciones estimadas." },
-    { "id": "m002", "date": "2026-05-29", "instrument": "EM", "type": "buy", "units": 123.208, "price": 8.9280, "fee": 0, "tax": 0, "estimated": true, "note": "Posición inicial MyInvestor: 1.100,00 € invertidos. Fecha y participaciones estimadas." },
-    { "id": "m003", "date": "2026-05-29", "instrument": "BTC", "type": "buy", "units": null, "price": null, "cost": 786.34, "fee": 0, "tax": 0, "estimated": true, "value_ref": { "date": "2026-09-28", "value": 928.14 }, "note": "Posición inicial MyInvestor: 786,34 € invertidos. Títulos calculados a partir del valor del 28-09-2026." },
-    { "id": "m004", "date": "2026-05-29", "instrument": "GOLD", "type": "buy", "units": null, "price": null, "cost": 733.79, "fee": 0, "tax": 0, "estimated": true, "value_ref": { "date": "2026-09-28", "value": 703.20 }, "note": "Posición inicial MyInvestor: 733,79 € invertidos. Títulos calculados a partir del valor del 28-09-2026." },
-
-    { "id": "d016", "date": "2026-06-11", "instrument": "MSFT", "type": "dividend", "amount": 0.80, "tax": 0.25 },
-    { "id": "d017", "date": "2026-06-15", "instrument": "GOOGL", "type": "dividend", "amount": 0.09, "tax": 0.03 },
-    { "id": "d018", "date": "2026-06-25", "instrument": "META", "type": "dividend", "amount": 0.26, "tax": 0.08 },
-    { "id": "d019", "date": "2026-06-26", "instrument": "NVDA", "type": "dividend", "amount": 0.39, "tax": 0.12 },
-
-    { "id": "t016", "date": "2026-07-17", "instrument": "IBE", "type": "sell", "units": 15.349194, "price": 20.88, "fee": 1, "tax": 0 },
-    { "id": "t017", "date": "2026-07-17", "instrument": "NVDA", "type": "sell", "units": 1.757651, "price": 177.34, "fee": 1, "tax": 0 },
-    { "id": "d020", "date": "2026-07-27", "instrument": "IBE", "type": "dividend", "amount": 0.02, "tax": 0 },
-    { "id": "d021", "date": "2026-07-27", "instrument": "IBE", "type": "dividend", "amount": 5.28, "tax": 0, "note": "Venta de derechos (scrip dividend)" },
-    { "id": "t018", "date": "2026-07-30", "instrument": "CABK", "type": "buy", "units": 20, "price": 12.44, "fee": 1, "tax": 0.50 },
-    { "id": "t019", "date": "2026-07-30", "instrument": "NVDA", "type": "buy", "units": 1, "price": 167.62, "fee": 1, "tax": 0 },
-    { "id": "t020", "date": "2026-07-30", "instrument": "FDR", "type": "buy", "units": 4.3, "price": 19.09, "fee": 1, "tax": 0.16 },
-    { "id": "t021", "date": "2026-08-27", "instrument": "FDR", "type": "sell", "units": 4.3, "price": 19.54, "fee": 1, "tax": 0 },
-    { "id": "t022", "date": "2026-08-27", "instrument": "CABK", "type": "sell", "units": 20, "price": 13.145, "fee": 1, "tax": 0 },
-    { "id": "d022", "date": "2026-09-10", "instrument": "MSFT", "type": "dividend", "amount": 0.92, "tax": 0.29 },
-    { "id": "d023", "date": "2026-09-14", "instrument": "GOOGL", "type": "dividend", "amount": 0.09, "tax": 0.03 },
-    { "id": "t023", "date": "2026-09-21", "instrument": "AMZN", "type": "buy", "units": 1, "price": 223.00, "fee": 1, "tax": 0 },
-    { "id": "t024", "date": "2026-09-21", "instrument": "ORCL", "type": "buy", "units": 2, "price": 129.40, "fee": 1, "tax": 0 },
-    { "id": "t025", "date": "2026-09-21", "instrument": "NOVO", "type": "buy", "units": 4, "price": 37.415, "fee": 1, "tax": 0 },
-    { "id": "t026", "date": "2026-09-22", "instrument": "NOVO", "type": "sell", "units": 4, "price": 34.78, "fee": 1, "tax": 0 },
-    { "id": "t027", "date": "2026-09-22", "instrument": "AMZN", "type": "buy", "units": 0.65, "price": 222.40, "fee": 1, "tax": 0 },
-    { "id": "d024", "date": "2026-09-28", "instrument": "META", "type": "dividend", "amount": 0.25, "tax": 0.08 },
-
-    { "id": "m005", "date": "2026-09-30", "instrument": "MAGA", "type": "buy", "units": 2.00372, "price": 279.48, "fee": 0, "tax": 0, "estimated": true, "note": "Compra MyInvestor: 560,00 €. Fecha y participaciones estimadas." },
-    { "id": "m006", "date": "2026-09-30", "instrument": "HOROS", "type": "buy", "units": 4.8382, "price": 103.345, "fee": 0, "tax": 0, "estimated": true, "note": "Compra MyInvestor: 500,00 €. Fecha y participaciones estimadas." },
-    { "id": "m007", "date": "2026-10-01", "instrument": "GOLD", "type": "buy", "units": null, "price": null, "cost": 497.80, "fee": 0, "tax": 0, "estimated": true, "value_ref": { "date": "2026-10-05", "value": 513.92 }, "note": "Ampliación oro MyInvestor: 497,80 €. Títulos calculados a partir del valor del 05-10-2026." },
-
-    { "id": "t028", "date": "2026-10-01", "instrument": "AMZN", "type": "buy", "units": 0.35, "price": 221.54, "fee": 1, "tax": 0 },
-    { "id": "t029", "date": "2026-10-01", "instrument": "ORY", "type": "buy", "units": 155, "price": 2.746, "fee": 1, "tax": 0 },
-    { "id": "d025", "date": "2026-10-01", "instrument": "NVDA", "type": "dividend", "amount": 0.15, "tax": 0 }
+    {
+      "id": "t001",
+      "date": "2025-02-04",
+      "instrument": "NVDA",
+      "type": "buy",
+      "units": 0.737991,
+      "price": 114.5,
+      "fee": 0,
+      "tax": 0
+    },
+    {
+      "id": "t002",
+      "date": "2025-02-04",
+      "instrument": "NVDA",
+      "type": "buy",
+      "units": 1,
+      "price": 114.5,
+      "fee": 1,
+      "tax": 0
+    },
+    {
+      "id": "t003",
+      "date": "2025-02-10",
+      "instrument": "GOOGL",
+      "type": "buy",
+      "units": 1,
+      "price": 181.5,
+      "fee": 1,
+      "tax": 0
+    },
+    {
+      "id": "t004",
+      "date": "2025-02-10",
+      "instrument": "GOOGL",
+      "type": "buy",
+      "units": 0.101928,
+      "price": 181.5,
+      "fee": 0,
+      "tax": 0
+    },
+    {
+      "id": "t005",
+      "date": "2025-02-10",
+      "instrument": "MSFT",
+      "type": "buy",
+      "units": 0.008591,
+      "price": 401.55,
+      "fee": 0,
+      "tax": 0
+    },
+    {
+      "id": "t006",
+      "date": "2025-02-10",
+      "instrument": "MSFT",
+      "type": "buy",
+      "units": 1,
+      "price": 401.55,
+      "fee": 1,
+      "tax": 0
+    },
+    {
+      "id": "t007",
+      "date": "2025-02-12",
+      "instrument": "HIVE",
+      "type": "buy",
+      "units": 50,
+      "price": 2.71,
+      "fee": 1,
+      "tax": 0
+    },
+    {
+      "id": "t008",
+      "date": "2025-02-18",
+      "instrument": "NVDA",
+      "type": "buy",
+      "units": 0.885536,
+      "price": 135.24,
+      "fee": 0,
+      "tax": 0
+    },
+    {
+      "id": "t009",
+      "date": "2025-02-18",
+      "instrument": "NVDA",
+      "type": "buy",
+      "units": 1,
+      "price": 135.24,
+      "fee": 1,
+      "tax": 0
+    },
+    {
+      "id": "d001",
+      "date": "2025-03-13",
+      "instrument": "MSFT",
+      "type": "dividend",
+      "amount": 0.77,
+      "tax": 0.12
+    },
+    {
+      "id": "d002",
+      "date": "2025-03-17",
+      "instrument": "GOOGL",
+      "type": "dividend",
+      "amount": 0.2,
+      "tax": 0.03
+    },
+    {
+      "id": "d003",
+      "date": "2025-04-02",
+      "instrument": "NVDA",
+      "type": "dividend",
+      "amount": 0.04,
+      "tax": 0.01
+    },
+    {
+      "id": "d004",
+      "date": "2025-06-12",
+      "instrument": "MSFT",
+      "type": "dividend",
+      "amount": 0.73,
+      "tax": 0.11
+    },
+    {
+      "id": "d005",
+      "date": "2025-06-16",
+      "instrument": "GOOGL",
+      "type": "dividend",
+      "amount": 0.2,
+      "tax": 0.03
+    },
+    {
+      "id": "d006",
+      "date": "2025-07-03",
+      "instrument": "NVDA",
+      "type": "dividend",
+      "amount": 0.03,
+      "tax": 0.01
+    },
+    {
+      "id": "d007",
+      "date": "2025-09-11",
+      "instrument": "MSFT",
+      "type": "dividend",
+      "amount": 0.72,
+      "tax": 0.23
+    },
+    {
+      "id": "d008",
+      "date": "2025-09-15",
+      "instrument": "GOOGL",
+      "type": "dividend",
+      "amount": 0.2,
+      "tax": 0.06
+    },
+    {
+      "id": "d009",
+      "date": "2025-10-02",
+      "instrument": "NVDA",
+      "type": "dividend",
+      "amount": 0.03,
+      "tax": 0.01
+    },
+    {
+      "id": "d010",
+      "date": "2025-12-11",
+      "instrument": "MSFT",
+      "type": "dividend",
+      "amount": 0.79,
+      "tax": 0.25
+    },
+    {
+      "id": "d011",
+      "date": "2025-12-15",
+      "instrument": "GOOGL",
+      "type": "dividend",
+      "amount": 0.2,
+      "tax": 0.06
+    },
+    {
+      "id": "d012",
+      "date": "2025-12-24",
+      "instrument": "NVDA",
+      "type": "dividend",
+      "amount": 0.03,
+      "tax": 0.01
+    },
+    {
+      "id": "d013",
+      "date": "2026-03-12",
+      "instrument": "MSFT",
+      "type": "dividend",
+      "amount": 0.79,
+      "tax": 0.25
+    },
+    {
+      "id": "d014",
+      "date": "2026-03-16",
+      "instrument": "GOOGL",
+      "type": "dividend",
+      "amount": 0.2,
+      "tax": 0.06
+    },
+    {
+      "id": "d015",
+      "date": "2026-04-01",
+      "instrument": "NVDA",
+      "type": "dividend",
+      "amount": 0.03,
+      "tax": 0.01
+    },
+    {
+      "id": "t010",
+      "date": "2026-05-28",
+      "instrument": "HIVE",
+      "type": "sell",
+      "units": 50,
+      "price": 3.842,
+      "fee": 1,
+      "tax": 0
+    },
+    {
+      "id": "t011",
+      "date": "2026-05-28",
+      "instrument": "NVDA",
+      "type": "sell",
+      "units": 1.865876,
+      "price": 182.22,
+      "fee": 1,
+      "tax": 0
+    },
+    {
+      "id": "t012",
+      "date": "2026-05-28",
+      "instrument": "GOOGL",
+      "type": "sell",
+      "units": 0.657501,
+      "price": 334.6,
+      "fee": 1,
+      "tax": 0
+    },
+    {
+      "id": "t013",
+      "date": "2026-05-28",
+      "instrument": "MSFT",
+      "type": "buy",
+      "units": 0.164338,
+      "price": 365.15,
+      "fee": 1,
+      "tax": 0
+    },
+    {
+      "id": "t014",
+      "date": "2026-05-28",
+      "instrument": "IBE",
+      "type": "buy",
+      "units": 15.349194,
+      "price": 19.55,
+      "fee": 1,
+      "tax": 0.6
+    },
+    {
+      "id": "t015",
+      "date": "2026-05-28",
+      "instrument": "META",
+      "type": "buy",
+      "units": 0.552486,
+      "price": 542.9,
+      "fee": 1,
+      "tax": 0
+    },
+    {
+      "id": "m001",
+      "date": "2026-06-03",
+      "instrument": "WORLD",
+      "type": "buy",
+      "units": null,
+      "price": null,
+      "cost": 3500.0,
+      "fee": 0,
+      "tax": 0,
+      "source": "MyInvestor CSV",
+      "amount_based": true
+    },
+    {
+      "id": "m008",
+      "date": "2026-06-03",
+      "instrument": "GOLD",
+      "type": "buy",
+      "units": 5,
+      "price": 75.2,
+      "cost": 376.0,
+      "fee": 0,
+      "tax": 0,
+      "source": "MyInvestor CSV"
+    },
+    {
+      "id": "m012",
+      "date": "2026-06-03",
+      "instrument": "BTC",
+      "type": "buy",
+      "units": null,
+      "price": null,
+      "cost": 521.88,
+      "fee": 0,
+      "tax": 0,
+      "source": "MyInvestor CSV",
+      "amount_based": true
+    },
+    {
+      "id": "m005",
+      "date": "2026-06-04",
+      "instrument": "EM",
+      "type": "buy",
+      "units": null,
+      "price": null,
+      "cost": 500.0,
+      "fee": 0,
+      "tax": 0,
+      "source": "MyInvestor CSV",
+      "amount_based": true
+    },
+    {
+      "id": "d016",
+      "date": "2026-06-11",
+      "instrument": "MSFT",
+      "type": "dividend",
+      "amount": 0.8,
+      "tax": 0.25
+    },
+    {
+      "id": "d017",
+      "date": "2026-06-15",
+      "instrument": "GOOGL",
+      "type": "dividend",
+      "amount": 0.09,
+      "tax": 0.03
+    },
+    {
+      "id": "d018",
+      "date": "2026-06-25",
+      "instrument": "META",
+      "type": "dividend",
+      "amount": 0.26,
+      "tax": 0.08
+    },
+    {
+      "id": "d019",
+      "date": "2026-06-26",
+      "instrument": "NVDA",
+      "type": "dividend",
+      "amount": 0.39,
+      "tax": 0.12
+    },
+    {
+      "id": "m006",
+      "date": "2026-07-07",
+      "instrument": "EM",
+      "type": "buy",
+      "units": null,
+      "price": null,
+      "cost": 300.0,
+      "fee": 0,
+      "tax": 0,
+      "source": "MyInvestor CSV",
+      "amount_based": true
+    },
+    {
+      "id": "m002",
+      "date": "2026-07-08",
+      "instrument": "WORLD",
+      "type": "buy",
+      "units": null,
+      "price": null,
+      "cost": 550.0,
+      "fee": 0,
+      "tax": 0,
+      "source": "MyInvestor CSV",
+      "amount_based": true
+    },
+    {
+      "id": "t016",
+      "date": "2026-07-17",
+      "instrument": "IBE",
+      "type": "sell",
+      "units": 15.349194,
+      "price": 20.88,
+      "fee": 1,
+      "tax": 0
+    },
+    {
+      "id": "t017",
+      "date": "2026-07-17",
+      "instrument": "NVDA",
+      "type": "sell",
+      "units": 1.757651,
+      "price": 177.34,
+      "fee": 1,
+      "tax": 0
+    },
+    {
+      "id": "d020",
+      "date": "2026-07-27",
+      "instrument": "IBE",
+      "type": "dividend",
+      "amount": 0.02,
+      "tax": 0
+    },
+    {
+      "id": "d021",
+      "date": "2026-07-27",
+      "instrument": "IBE",
+      "type": "dividend",
+      "amount": 5.28,
+      "tax": 0,
+      "note": "Venta de derechos (scrip dividend)"
+    },
+    {
+      "id": "m009",
+      "date": "2026-07-30",
+      "instrument": "GOLD",
+      "type": "buy",
+      "units": 2,
+      "price": 69.585,
+      "cost": 139.17,
+      "fee": 0,
+      "tax": 0,
+      "source": "MyInvestor CSV"
+    },
+    {
+      "id": "m013",
+      "date": "2026-07-30",
+      "instrument": "BTC",
+      "type": "buy",
+      "units": null,
+      "price": null,
+      "cost": 164.89,
+      "fee": 0,
+      "tax": 0,
+      "source": "MyInvestor CSV",
+      "amount_based": true
+    },
+    {
+      "id": "t018",
+      "date": "2026-07-30",
+      "instrument": "CABK",
+      "type": "buy",
+      "units": 20,
+      "price": 12.44,
+      "fee": 1,
+      "tax": 0.5
+    },
+    {
+      "id": "t019",
+      "date": "2026-07-30",
+      "instrument": "NVDA",
+      "type": "buy",
+      "units": 1,
+      "price": 167.62,
+      "fee": 1,
+      "tax": 0
+    },
+    {
+      "id": "t020",
+      "date": "2026-07-30",
+      "instrument": "FDR",
+      "type": "buy",
+      "units": 4.3,
+      "price": 19.09,
+      "fee": 1,
+      "tax": 0.16
+    },
+    {
+      "id": "m003",
+      "date": "2026-07-31",
+      "instrument": "WORLD",
+      "type": "buy",
+      "units": null,
+      "price": null,
+      "cost": 890.0,
+      "fee": 0,
+      "tax": 0,
+      "source": "MyInvestor CSV",
+      "amount_based": true
+    },
+    {
+      "id": "m007",
+      "date": "2026-07-31",
+      "instrument": "EM",
+      "type": "buy",
+      "units": null,
+      "price": null,
+      "cost": 300.0,
+      "fee": 0,
+      "tax": 0,
+      "source": "MyInvestor CSV",
+      "amount_based": true
+    },
+    {
+      "id": "t021",
+      "date": "2026-08-27",
+      "instrument": "FDR",
+      "type": "sell",
+      "units": 4.3,
+      "price": 19.54,
+      "fee": 1,
+      "tax": 0
+    },
+    {
+      "id": "t022",
+      "date": "2026-08-27",
+      "instrument": "CABK",
+      "type": "sell",
+      "units": 20,
+      "price": 13.145,
+      "fee": 1,
+      "tax": 0
+    },
+    {
+      "id": "d022",
+      "date": "2026-09-10",
+      "instrument": "MSFT",
+      "type": "dividend",
+      "amount": 0.92,
+      "tax": 0.29
+    },
+    {
+      "id": "d023",
+      "date": "2026-09-14",
+      "instrument": "GOOGL",
+      "type": "dividend",
+      "amount": 0.09,
+      "tax": 0.03
+    },
+    {
+      "id": "m010",
+      "date": "2026-09-16",
+      "instrument": "GOLD",
+      "type": "buy",
+      "units": 3,
+      "price": 72.873333,
+      "cost": 218.62,
+      "fee": 0,
+      "tax": 0,
+      "source": "MyInvestor CSV"
+    },
+    {
+      "id": "m014",
+      "date": "2026-09-16",
+      "instrument": "BTC",
+      "type": "buy",
+      "units": null,
+      "price": null,
+      "cost": 99.57,
+      "fee": 0,
+      "tax": 0,
+      "source": "MyInvestor CSV",
+      "amount_based": true
+    },
+    {
+      "id": "m004",
+      "date": "2026-09-17",
+      "instrument": "WORLD",
+      "type": "buy",
+      "units": null,
+      "price": null,
+      "cost": 299.98,
+      "fee": 0,
+      "tax": 0,
+      "source": "MyInvestor CSV",
+      "amount_based": true
+    },
+    {
+      "id": "t023",
+      "date": "2026-09-21",
+      "instrument": "AMZN",
+      "type": "buy",
+      "units": 1,
+      "price": 223.0,
+      "fee": 1,
+      "tax": 0
+    },
+    {
+      "id": "t024",
+      "date": "2026-09-21",
+      "instrument": "ORCL",
+      "type": "buy",
+      "units": 2,
+      "price": 129.4,
+      "fee": 1,
+      "tax": 0
+    },
+    {
+      "id": "t025",
+      "date": "2026-09-21",
+      "instrument": "NOVO",
+      "type": "buy",
+      "units": 4,
+      "price": 37.415,
+      "fee": 1,
+      "tax": 0
+    },
+    {
+      "id": "t026",
+      "date": "2026-09-22",
+      "instrument": "NOVO",
+      "type": "sell",
+      "units": 4,
+      "price": 34.78,
+      "fee": 1,
+      "tax": 0
+    },
+    {
+      "id": "t027",
+      "date": "2026-09-22",
+      "instrument": "AMZN",
+      "type": "buy",
+      "units": 0.65,
+      "price": 222.4,
+      "fee": 1,
+      "tax": 0
+    },
+    {
+      "id": "d024",
+      "date": "2026-09-28",
+      "instrument": "META",
+      "type": "dividend",
+      "amount": 0.25,
+      "tax": 0.08
+    },
+    {
+      "id": "m015",
+      "date": "2026-09-30",
+      "instrument": "MAGA",
+      "type": "buy",
+      "units": null,
+      "price": null,
+      "cost": 559.99,
+      "fee": 0,
+      "tax": 0,
+      "source": "MyInvestor CSV",
+      "amount_based": true
+    },
+    {
+      "id": "m016",
+      "date": "2026-09-30",
+      "instrument": "HOROS",
+      "type": "buy",
+      "units": null,
+      "price": null,
+      "cost": 500.0,
+      "fee": 0,
+      "tax": 0,
+      "source": "MyInvestor CSV",
+      "amount_based": true
+    },
+    {
+      "id": "d025",
+      "date": "2026-10-01",
+      "instrument": "NVDA",
+      "type": "dividend",
+      "amount": 0.15,
+      "tax": 0
+    },
+    {
+      "id": "m011",
+      "date": "2026-10-01",
+      "instrument": "GOLD",
+      "type": "buy",
+      "units": 7,
+      "price": 71.112857,
+      "cost": 497.79,
+      "fee": 0,
+      "tax": 0,
+      "source": "MyInvestor CSV"
+    },
+    {
+      "id": "t028",
+      "date": "2026-10-01",
+      "instrument": "AMZN",
+      "type": "buy",
+      "units": 0.35,
+      "price": 221.54,
+      "fee": 1,
+      "tax": 0
+    },
+    {
+      "id": "t029",
+      "date": "2026-10-01",
+      "instrument": "ORY",
+      "type": "buy",
+      "units": 155,
+      "price": 2.746,
+      "fee": 1,
+      "tax": 0
+    }
   ],
   "interest": [
-    { "year": 2025, "gross": 0.60, "tax": 0 },
-    { "year": 2026, "gross": 12.58, "tax": 2.27 }
+    {
+      "year": 2025,
+      "gross": 0.6,
+      "tax": 0,
+      "source": "Trade Republic"
+    },
+    {
+      "year": 2026,
+      "gross": 12.58,
+      "tax": 2.27,
+      "source": "Trade Republic"
+    },
+    {
+      "year": 2026,
+      "gross": 0.97,
+      "tax": 0,
+      "source": "MyInvestor"
+    }
   ],
   "targets": {},
   "settings": {
     "baseCurrency": "EUR",
     "theme": "light"
-  }
+  },
+  "other": [
+    {
+      "year": 2026,
+      "date": "2026-06-01",
+      "amount": 20.25,
+      "note": "Promoción amigo MyInvestor"
+    }
+  ]
 }

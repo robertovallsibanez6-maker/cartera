@@ -133,13 +133,14 @@ function hasFeed(id) { return !!S.prices?.quotes?.[id]; }
 function resolveValueRefLots() {
   let changed = false;
   for (const t of S.txs) {
-    if (t.units != null || !t.value_ref) continue;
-    const p = priceEURAt(t.instrument, t.value_ref.date);
-    if (p) {
-      t.units = +(t.value_ref.value / p).toFixed(6);
-      t.price = +(t.cost / t.units).toFixed(6);
-      t.resolvedFrom = 'value_ref';
-      changed = true;
+    if (t.units != null) continue;
+    if (t.value_ref) {
+      const p = priceEURAt(t.instrument, t.value_ref.date);
+      if (p) { t.units = +(t.value_ref.value / p).toFixed(6); t.price = +(t.cost / t.units).toFixed(6); t.resolvedFrom = 'value_ref'; changed = true; }
+    } else if (t.amount_based && t.cost > 0) {
+      // Compra por importe: participaciones = importe / precio del día de la compra
+      const p = priceEURAt(t.instrument, t.date);
+      if (p) { t.units = +(t.cost / p).toFixed(6); t.price = +(t.cost / t.units).toFixed(6); t.resolvedFrom = 'amount'; changed = true; }
     }
   }
   if (changed) store.set('txs', S.txs);
@@ -150,7 +151,7 @@ function resolveValueRefLots() {
 // ---------------------------------------------------------------------------
 const C = { positions: {}, realized: [], dividends: [], series: null, totals: {} };
 
-function txCost(t) { return (t.units || 0) * (t.price || 0) + (t.fee || 0) + (t.tax || 0); }
+function txCost(t) { return (t.units != null ? (t.units || 0) * (t.price || 0) : (t.cost || 0)) + (t.fee || 0) + (t.tax || 0); }
 function txProceeds(t) { return (t.units || 0) * (t.price || 0) - (t.fee || 0) - (t.tax || 0); }
 
 function recompute() {
@@ -201,11 +202,12 @@ function recompute() {
   C.positions = pos; C.realized = realized; C.dividends = dividends;
   const totalRealized = sum(realized, (r) => r.gain);
   const totalDiv = sum(dividends, (d) => d.amount), totalDivTax = sum(dividends, (d) => d.tax);
-  const interest = sum(S.seed?.interest || [], (i) => i.gross);
+  const interest = sum(S.seed?.interest || [], (i) => i.gross - (i.tax || 0));
+  const other = sum(S.seed?.other || [], (o) => o.amount);
   C.totals = { value: totalValue, cost: totalCost, pl: totalValue - totalCost, plPct: totalCost ? (totalValue - totalCost) / totalCost * 100 : 0,
-    dayChange, dayPct: dayBase ? dayChange / dayBase * 100 : 0, realized: totalRealized, dividends: totalDiv, dividendsNet: totalDiv - totalDivTax, interest,
+    dayChange, dayPct: dayBase ? dayChange / dayBase * 100 : 0, realized: totalRealized, dividends: totalDiv, dividendsNet: totalDiv - totalDivTax, interest, other,
     fees: sum(Object.values(pos), (p) => p.fees), taxes: sum(Object.values(pos), (p) => p.taxes), feedMissing,
-    total: totalValue - totalCost + totalRealized + totalDiv - totalDivTax + interest };
+    total: totalValue - totalCost + totalRealized + totalDiv - totalDivTax + interest + other };
   C.series = buildSeries();
 }
 
@@ -217,7 +219,7 @@ function unitsAt(p, date) {
 
 // Serie diaria: valor de cartera y aportado neto acumulado.
 function buildSeries() {
-  const txs = S.txs.filter((t) => t.units != null && (t.type === 'buy' || t.type === 'sell'));
+  const txs = S.txs.filter((t) => (t.units != null || t.cost) && (t.type === 'buy' || t.type === 'sell'));
   if (!txs.length) return { dates: [], value: [], invested: [] };
   const first = txs.reduce((m, t) => t.date < m ? t.date : m, txs[0].date);
   const end = todayISO();
@@ -475,7 +477,7 @@ function viewResumen() {
     <div class="stat"><div class="k">Invertido</div><div class="v num">${eur(T.cost, 0)}</div><div class="s muted">${Object.values(C.positions).filter((p) => p.units > 1e-9).length} posiciones</div></div>
     <div class="stat"><div class="k">Ganancia latente</div><div class="v num ${cls(T.pl)}">${eurS(T.pl, 0)}</div><div class="s ${cls(T.pl)}">${pct(T.plPct)}</div></div>
     <div class="stat"><div class="k">Realizado</div><div class="v num ${cls(T.realized)}">${eurS(T.realized, 0)}</div><div class="s muted">${C.realized.length} ventas</div></div>
-    <div class="stat"><div class="k">Dividendos e intereses</div><div class="v num">${eur(T.dividendsNet + T.interest, 0)}</div><div class="s muted">netos</div></div>
+    <div class="stat"><div class="k">Dividendos e intereses</div><div class="v num">${eur(T.dividendsNet + T.interest + T.other, 0)}</div><div class="s muted">netos</div></div>
   </div>
   <section class="card">
     <div class="row" style="margin-bottom:10px"><h2 style="margin:0">Evolución</h2>${pr ? `<span class="pill ${cls(pr.gain)}">${eurS(pr.gain, 0)} · ${pr.pct != null ? pct(pr.pct) : '—'}</span>` : ''}</div>
@@ -491,17 +493,27 @@ function viewResumen() {
     <div class="legend">${buckets.map((b) => `<span><span class="dot" style="background:${b.color}"></span>${esc(b.label)} <b>${pct(b.value / T.value * 100, 0, false)}</b></span>`).join('')}</div>
   </section>
   ${movers.length ? `<section class="card"><h2>Hoy</h2><div class="movers">${movers.map((p) => `<div class="mover tap" data-pos="${p.id}"><div class="n">${esc(byId[p.id].short)}</div><div class="p num ${cls(p.dayPct)}">${pct(p.dayPct)}</div><div class="small muted">${eurS(p.dayChange)}</div></div>`).join('')}</div></section>` : ''}
+  ${plBars()}
   <section class="card">
     <h2>Resultado total <span class="sub">desde el inicio</span></h2>
     <table class="tbl">
       <tr><td>Ganancia latente</td><td class="r num ${cls(T.pl)}">${eurS(T.pl)}</td></tr>
       <tr><td>Plusvalías realizadas</td><td class="r num ${cls(T.realized)}">${eurS(T.realized)}</td></tr>
       <tr><td>Dividendos netos</td><td class="r num">${eurS(T.dividendsNet)}</td></tr>
-      <tr><td>Intereses</td><td class="r num">${eurS(T.interest)}</td></tr>
+      <tr><td>Intereses netos</td><td class="r num">${eurS(T.interest)}</td></tr>
+      ${T.other ? `<tr><td>Promociones y otros</td><td class="r num">${eurS(T.other)}</td></tr>` : ''}
       <tr><td><b>Total</b></td><td class="r num ${cls(T.total)}"><b>${eurS(T.total)}</b></td></tr>
     </table>
     <div class="small muted" style="margin-top:8px">Comisiones pagadas: ${eur(T.fees + T.taxes)} (ya descontadas).</div>
   </section>`;
+}
+
+
+function plBars() {
+  const rows = Object.values(C.positions).map((p) => ({ label: byId[p.id].short, value: p.pl + p.realized + (p.dividends - p.dividendsTax), color: byId[p.id].color })).filter((r) => Math.abs(r.value) > 0.5).sort((a, b) => b.value - a.value);
+  if (!rows.length) return '';
+  const m = Math.max(...rows.map((r) => Math.abs(r.value)));
+  return `<section class="card"><h2>Resultado por activo <span class="sub">€, total desde el inicio</span></h2><div class="hbars">${rows.map((r) => `<div class="hbar"><div class="lab"><span><span class="dot" style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${r.color};margin-right:7px"></span>${esc(r.label)}</span><b class="num ${cls(r.value)}">${eurS(r.value, 0)}</b></div><div class="track" style="background:transparent"><div style="position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--grid)"></div><div class="fill" style="left:${r.value >= 0 ? 50 : 50 - Math.abs(r.value) / m * 50}%;width:${Math.abs(r.value) / m * 50}%;background:${r.value >= 0 ? 'var(--good-fill)' : 'var(--bad-fill)'};opacity:0.85"></div></div></div>`).join('')}</div><div class="small muted" style="margin-top:8px">Incluye ganancia latente, plusvalías realizadas y dividendos netos. Toca Posiciones para ver el detalle.</div></section>`;
 }
 
 // ---------------------------------------------------------------------------
@@ -523,7 +535,25 @@ function viewPosiciones() {
   <div class="sortbar">${[['valor', 'Por valor'], ['dia', 'Por día'], ['rent', 'Por rentabilidad'], ['nombre', 'A–Z']].map(([k, l]) => `<button class="chip ${S.ui.sort === k ? 'active' : ''}" data-sort="${k}">${l}</button>`).join('')}</div>
   ${order.map((b) => `<div class="group-title">${esc(S.buckets[b]?.label || b)} · ${eur(sum(groups[b], (p) => p.value), 0)}</div><section class="card tight"><div class="list">${groups[b].map(item).join('')}</div></section>`).join('')}
   ${!list.length ? '<div class="empty">No hay posiciones abiertas con este filtro.</div>' : ''}
-  <div class="small muted" style="text-align:center">Día · desde compra. Toca una posición para ver el detalle.</div>`;
+  <div class="small muted" style="text-align:center">Día · desde compra. Toca una posición para ver el detalle.</div>
+  ${plTable(S.ui.broker)}`;
+}
+
+
+// Resultado total por activo (latente + realizado + dividendos), incluidas posiciones cerradas.
+function plTable(broker) {
+  let rows = Object.values(C.positions).filter((p) => broker === 'all' || byId[p.id].broker === broker).map((p) => {
+    const invested = p.cost + sum(C.realized.filter((r) => r.id === p.id), (r) => r.cost);
+    const total = p.pl + p.realized + (p.dividends - p.dividendsTax);
+    return { p, invested, total, pct: invested ? total / invested * 100 : null, open: p.units > 1e-9 };
+  }).filter((r) => Math.abs(r.total) > 0.004 || r.open).sort((a, b) => b.total - a.total);
+  if (!rows.length) return '';
+  const tot = sum(rows, (r) => r.total);
+  return `<section class="card"><h2>Resultado por activo <span class="sub">latente + realizado + dividendos</span></h2>
+    <table class="tbl compact"><tr><th>Activo</th><th class="r">Latente</th><th class="r">Realizado</th><th class="r">Total</th></tr>
+    ${rows.map((r) => `<tr><td><span class="dot" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${byId[r.p.id].color || '#888'};margin-right:6px"></span>${esc(byId[r.p.id].short)}${r.open ? '' : '<span class="tag">cerrada</span>'}</td><td class="r num ${cls(r.p.pl)}">${r.open ? eurS(r.p.pl) : '—'}</td><td class="r num ${cls(r.p.realized + r.p.dividends - r.p.dividendsTax)}">${eurS(r.p.realized + r.p.dividends - r.p.dividendsTax)}</td><td class="r num ${cls(r.total)}"><b>${eurS(r.total)}</b><div class="muted" style="font-size:10px">${r.pct != null ? pct(r.pct) : ''}</div></td></tr>`).join('')}
+    <tr><td><b>Total</b></td><td class="r num ${cls(sum(rows, (r) => r.p.pl))}">${eurS(sum(rows, (r) => r.p.pl))}</td><td class="r num">${eurS(sum(rows, (r) => r.p.realized + r.p.dividends - r.p.dividendsTax))}</td><td class="r num ${cls(tot)}"><b>${eurS(tot)}</b></td></tr></table>
+    <div class="small muted" style="margin-top:8px">El porcentaje es sobre el total invertido en cada activo a lo largo del tiempo. Realizado incluye dividendos netos.</div></section>`;
 }
 
 function openPosition(id) {
@@ -694,7 +724,7 @@ function mountObjetivo() {
 function viewOperaciones() {
   const txs = [...S.txs].sort((a, b) => b.date.localeCompare(a.date) || (a.id < b.id ? 1 : -1));
   const years = [...new Set(txs.map((t) => t.date.slice(0, 4)))].sort().reverse();
-  const yearRows = years.map((y) => { const R = C.realized.filter((r) => r.date.startsWith(y)); const D = C.dividends.filter((d) => d.date.startsWith(y)); const F = S.txs.filter((t) => t.date.startsWith(y) && (t.type === 'buy' || t.type === 'sell')); const I = (S.seed?.interest || []).find((i) => String(i.year) === y); return { y, realized: sum(R, (r) => r.gain), divGross: sum(D, (d) => d.amount), divTax: sum(D, (d) => d.tax), fees: sum(F, (t) => (t.fee || 0) + (t.tax || 0)), interest: I ? I.gross : 0, buys: sum(F.filter((t) => t.type === 'buy'), txCost), sells: sum(F.filter((t) => t.type === 'sell'), txProceeds) }; });
+  const yearRows = years.map((y) => { const R = C.realized.filter((r) => r.date.startsWith(y)); const D = C.dividends.filter((d) => d.date.startsWith(y)); const F = S.txs.filter((t) => t.date.startsWith(y) && (t.type === 'buy' || t.type === 'sell')); const I = (S.seed?.interest || []).filter((i) => String(i.year) === y); return { y, realized: sum(R, (r) => r.gain), divGross: sum(D, (d) => d.amount), divTax: sum(D, (d) => d.tax), fees: sum(F, (t) => (t.fee || 0) + (t.tax || 0)), interest: sum(I, (i) => i.gross), buys: sum(F.filter((t) => t.type === 'buy'), txCost), sells: sum(F.filter((t) => t.type === 'sell'), txProceeds) }; });
   const groups = {}; for (const t of txs) { const k = t.date.slice(0, 7); (groups[k] = groups[k] || []).push(t); }
   const label = (t) => ({ buy: 'Compra', sell: 'Venta', dividend: 'Dividendo' }[t.type] || t.type);
   const amount = (t) => t.type === 'buy' ? -txCost(t) : t.type === 'sell' ? txProceeds(t) : (t.amount || 0) - (t.tax || 0);
