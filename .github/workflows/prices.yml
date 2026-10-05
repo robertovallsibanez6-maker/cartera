@@ -1,0 +1,52 @@
+name: Actualizar precios
+
+on:
+  schedule:
+    # Cada hora de 07:00 a 22:00 UTC (09:00-00:00 Madrid), de lunes a viernes.
+    - cron: "15 7-22 * * 1-5"
+    # Una vez el sábado para cerrar la semana (bitcoin cotiza en fin de semana en Xetra no, pero refresca eventos).
+    - cron: "15 9 * * 6"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "data/prices.json"
+      - "data/events.json"
+      - "data/status.json"
+      - "data/tickers.json"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: prices
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependencias
+        run: pip install --quiet yfinance requests pandas
+
+      - name: Descargar precios y eventos
+        run: python scripts/fetch_prices.py
+
+      - name: Publicar cambios
+        run: |
+          git config user.name "cartera-bot"
+          git config user.email "cartera-bot@users.noreply.github.com"
+          git add data/prices.json data/events.json data/tickers.json data/status.json
+          if git diff --cached --quiet; then
+            echo "Sin cambios"
+          else
+            git commit -m "Precios $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git push
+          fi

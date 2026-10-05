@@ -1,0 +1,179 @@
+{
+  "updated": "2026-10-05",
+  "note": "Composición aproximada de cada fondo/índice para el análisis de exposición (look-through). Pesos en % del fondo. Fuente: fichas de los índices MSCI y de las gestoras, redondeadas. Se actualiza trimestralmente.",
+  "stock": {
+    "label": "Acción individual",
+    "assetClass": { "Renta variable": 100 }
+  },
+  "msci_world": {
+    "label": "MSCI World",
+    "asOf": "2026-06-30",
+    "assetClass": { "Renta variable": 100 },
+    "sectors": {
+      "Tecnología": 27.0,
+      "Financiero": 16.0,
+      "Industrial": 11.0,
+      "Consumo discrecional": 10.0,
+      "Salud": 9.5,
+      "Comunicación": 8.5,
+      "Consumo básico": 5.5,
+      "Energía": 3.5,
+      "Materiales": 3.0,
+      "Utilities": 2.5,
+      "Inmobiliario": 2.0,
+      "Otros": 1.5
+    },
+    "countries": {
+      "Estados Unidos": 71.0,
+      "Japón": 5.5,
+      "Reino Unido": 3.7,
+      "Canadá": 3.2,
+      "Francia": 2.6,
+      "Alemania": 2.5,
+      "Suiza": 2.3,
+      "Australia": 1.7,
+      "Países Bajos": 1.3,
+      "Otros": 6.2
+    },
+    "currencies": {
+      "USD": 71.0,
+      "EUR": 9.0,
+      "JPY": 5.5,
+      "GBP": 3.7,
+      "CAD": 3.2,
+      "CHF": 2.3,
+      "AUD": 1.7,
+      "Otras": 3.6
+    },
+    "topHoldings": [
+      { "name": "NVIDIA", "weight": 5.5, "match": "NVDA" },
+      { "name": "Microsoft", "weight": 4.5, "match": "MSFT" },
+      { "name": "Apple", "weight": 4.4 },
+      { "name": "Alphabet", "weight": 3.5, "match": "GOOGL" },
+      { "name": "Amazon", "weight": 2.7, "match": "AMZN" },
+      { "name": "Meta Platforms", "weight": 1.9, "match": "META" },
+      { "name": "Broadcom", "weight": 1.8 },
+      { "name": "Tesla", "weight": 1.3 },
+      { "name": "Berkshire Hathaway", "weight": 1.1 },
+      { "name": "JPMorgan Chase", "weight": 1.0 },
+      { "name": "Eli Lilly", "weight": 1.0 },
+      { "name": "Oracle", "weight": 0.5, "match": "ORCL" }
+    ]
+  },
+  "msci_em": {
+    "label": "MSCI Emerging Markets",
+    "asOf": "2026-06-30",
+    "assetClass": { "Renta variable": 100 },
+    "sectors": {
+      "Tecnología": 25.0,
+      "Financiero": 24.0,
+      "Consumo discrecional": 12.0,
+      "Comunicación": 9.0,
+      "Industrial": 7.0,
+      "Materiales": 6.0,
+      "Energía": 4.0,
+      "Consumo básico": 4.0,
+      "Salud": 3.0,
+      "Utilities": 2.5,
+      "Inmobiliario": 1.5,
+      "Otros": 2.0
+    },
+    "countries": {
+      "China": 27.0,
+      "Taiwán": 20.0,
+      "India": 17.0,
+      "Corea del Sur": 11.0,
+      "Brasil": 4.5,
+      "Arabia Saudí": 3.5,
+      "Sudáfrica": 3.0,
+      "México": 2.0,
+      "Otros": 12.0
+    },
+    "currencies": {
+      "CNY/HKD": 27.0,
+      "TWD": 20.0,
+      "INR": 17.0,
+      "KRW": 11.0,
+      "BRL": 4.5,
+      "Otras": 20.5
+    },
+    "topHoldings": [
+      { "name": "TSMC", "weight": 10.5 },
+      { "name": "Tencent", "weight": 4.5 },
+      { "name": "Samsung Electronics", "weight": 3.5 },
+      { "name": "Alibaba", "weight": 2.5 },
+      { "name": "SK Hynix", "weight": 1.5 },
+      { "name": "HDFC Bank", "weight": 1.0 },
+      { "name": "Reliance Industries", "weight": 1.0 }
+    ]
+  },
+  "magallanes_eu": {
+    "label": "Magallanes European Equity",
+    "asOf": "2026-06-30",
+    "assetClass": { "Renta variable": 97, "Liquidez": 3 },
+    "sectors": {
+      "Industrial": 30.0,
+      "Consumo discrecional": 15.0,
+      "Materiales": 12.0,
+      "Energía": 10.0,
+      "Financiero": 10.0,
+      "Consumo básico": 8.0,
+      "Salud": 5.0,
+      "Otros": 7.0,
+      "Liquidez": 3.0
+    },
+    "countries": {
+      "Alemania": 20.0,
+      "Francia": 15.0,
+      "Reino Unido": 10.0,
+      "Países Bajos": 10.0,
+      "Italia": 10.0,
+      "España": 8.0,
+      "Bélgica": 7.0,
+      "Países nórdicos": 8.0,
+      "Austria": 5.0,
+      "Otros": 7.0
+    },
+    "currencies": {
+      "EUR": 75.0,
+      "GBP": 10.0,
+      "NOK/SEK/DKK": 10.0,
+      "CHF": 5.0
+    },
+    "topHoldings": []
+  },
+  "horos_patrimonio": {
+    "label": "Horos Patrimonio",
+    "asOf": "2026-08-31",
+    "assetClass": { "Renta fija": 85, "Renta variable": 10, "Liquidez": 5 },
+    "sectors": {
+      "Bonos corporativos": 85.0,
+      "Renta variable value": 10.0,
+      "Liquidez": 5.0
+    },
+    "countries": {
+      "Europa": 60.0,
+      "Estados Unidos": 25.0,
+      "Otros": 15.0
+    },
+    "currencies": {
+      "EUR": 90.0,
+      "USD": 10.0
+    },
+    "topHoldings": []
+  },
+  "gold": {
+    "label": "Oro físico",
+    "assetClass": { "Oro": 100 },
+    "sectors": { "Oro": 100 },
+    "countries": { "Global": 100 },
+    "currencies": { "USD": 100 }
+  },
+  "bitcoin": {
+    "label": "Bitcoin",
+    "assetClass": { "Cripto": 100 },
+    "sectors": { "Cripto": 100 },
+    "countries": { "Global": 100 },
+    "currencies": { "USD": 100 }
+  }
+}
