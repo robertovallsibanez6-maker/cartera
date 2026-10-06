@@ -142,6 +142,10 @@ def fetch_quote(tk, series):
     if not price or price != price:  # None o NaN
         price = series[-1][1]
         prev = series[-2][1] if len(series) > 1 else None
+    elif abs(price / series[-1][1] - 1) > 0.15:
+        # El dato intradía se aleja demasiado del último cierre (listado ilíquido o dato viejo): usa el cierre.
+        price = series[-1][1]
+        prev = series[-2][1] if len(series) > 1 else None
     if not prev or prev != prev:
         prev = series[-2][1] if len(series) > 1 else price
     # Si el último cierre del histórico es de hoy, el "previo" correcto es el anterior
