@@ -81,6 +81,19 @@ def resolve_tickers(instruments, cache):
         if iid in cache and cache[iid]:
             resolved[iid] = cache[iid]
             continue
+        # Lista de candidatos: nos quedamos con el primero que tenga histórico
+        for cand in ins.get("yahoo_candidates", []):
+            try:
+                _, series = fetch_history(cand)
+                if len(series) > 20:
+                    log(f"  {iid}: candidato válido {cand} ({len(series)} cierres)")
+                    resolved[iid] = cand
+                    cache[iid] = cand
+                    break
+            except Exception as e:
+                log(f"  {iid}: candidato {cand} sin datos ({e})")
+        if resolved.get(iid):
+            continue
         sym = search_yahoo(ins.get("isin") or ins["name"])
         if sym:
             log(f"  {iid}: resuelto {ins.get('isin')} -> {sym}")

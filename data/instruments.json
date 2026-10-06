@@ -225,13 +225,21 @@
       "bucket": "bitcoin",
       "broker": "MyInvestor",
       "currency": "EUR",
-      "yahoo": "FBTC.DE",
+      "yahoo": null,
       "exchange": "XETRA",
       "sector": "Cripto",
       "country": "Global",
       "ter": 0.25,
       "color": "#f7931a",
-      "lookthrough": "bitcoin"
+      "lookthrough": "bitcoin",
+      "yahoo_candidates": [
+        "FBTCG.DE",
+        "FBTC.DE",
+        "FBTC.SW",
+        "FBTC.L",
+        "FBTG.L",
+        "XS2434891219"
+      ]
     },
     {
       "id": "WORLD",
@@ -335,6 +343,18 @@
     {
       "pair": "EURUSD",
       "yahoo": "EURUSD=X"
+    },
+    {
+      "pair": "EURGBP",
+      "yahoo": "EURGBP=X"
+    },
+    {
+      "pair": "EURCHF",
+      "yahoo": "EURCHF=X"
+    },
+    {
+      "pair": "EURDKK",
+      "yahoo": "EURDKK=X"
     }
   ]
 }
